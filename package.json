@@ -18,7 +18,10 @@
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-slot": "^1.2.3",
+    "@surrealdb/wasm": "^1.4.1",
+    "@t3-oss/env-core": "^0.13.8",
     "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/react-query": "^5.87.4",
     "@tanstack/react-router": "^1.131.44",
     "@tanstack/react-router-devtools": "^1.131.44",
     "class-variance-authority": "^0.7.1",
@@ -28,11 +31,14 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "sonner": "^2.0.7",
+    "surrealdb": "^1.3.2",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
+    "@tanstack/eslint-plugin-query": "^5.86.0",
     "@tanstack/eslint-plugin-router": "^1.131.2",
     "@tanstack/router-plugin": "^1.131.44",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",

@@ -1,5 +1,14 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import {
+  Link,
+  Outlet,
+  createRootRouteWithContext
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import type Surreal from "surrealdb";
+
+interface RouterContext {
+  surrealClient: Surreal;
+}
 
 const RootLayout = () => (
   <>
@@ -17,4 +26,7 @@ const RootLayout = () => (
   </>
 );
 
-export const Route = createRootRoute({ component: RootLayout });
+// NOTE: the double call is on purpose, since createRootRouteWithContext is a factory
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootLayout
+});
