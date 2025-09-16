@@ -42,7 +42,7 @@ Follow these steps to get a local development environment up and running.
 2.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/YOUR_USERNAME/project-za.git
+    git clone https://github.com/RyanLurn/project-za.git
     cd project-za
     ```
 
