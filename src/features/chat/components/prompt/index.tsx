@@ -30,10 +30,15 @@ function Prompt({ className }: { className?: string }) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const promptText = prompt.trim();
+    if (promptText === "") {
+      return;
+    }
+    setPrompt("");
     mutate({
       surrealClient,
       role: "user",
-      text: prompt
+      text: promptText
     });
   }
 
