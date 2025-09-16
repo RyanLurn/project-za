@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import tanStackRouter from "@tanstack/eslint-plugin-router";
 import prettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -21,6 +22,7 @@ export default tseslint.config([
       globals: globals.browser
     }
   },
+  ...tanStackRouter.configs["flat/recommended"],
   {
     name: "prettier",
     ...prettier
