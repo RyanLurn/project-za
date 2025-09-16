@@ -6,7 +6,7 @@ function SendButton({ isDisabled }: { isDisabled: boolean }) {
     <Button
       size="icon"
       type="submit"
-      className="rounded-lg"
+      className="m-2 self-end rounded-lg"
       disabled={isDisabled}
     >
       {isDisabled ? (
