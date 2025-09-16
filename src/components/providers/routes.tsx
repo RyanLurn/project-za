@@ -24,11 +24,7 @@ function RoutesProvider() {
 
   useEffect(() => {
     if (isSuccess) {
-      // Example: run a query once the connection is successful
-      client
-        .query("SELECT * FROM users")
-        .then(console.log)
-        .catch(console.error);
+      console.log("Surreal client connected:", client);
     }
   }, [isSuccess, client]);
 
@@ -36,7 +32,7 @@ function RoutesProvider() {
   if (isError)
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-2">
-        <p>Failed to connect to SurrealDB</p>
+        <p>Failed to connect to the database</p>
         <p>Error: {String(error)}</p>
         <Button onClick={connect}>Retry</Button>
       </div>
