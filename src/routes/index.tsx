@@ -1,15 +1,23 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ExampleComponent } from "@/components/example";
 
 export const Route = createFileRoute("/")({
-  component: Index
+  component: Index,
+  loader: ({ context }) => {
+    return context.surrealClient;
+  }
 });
 
 function Index() {
+  const surrealClient = Route.useLoaderData();
+
+  useEffect(() => {
+    console.log("Surreal client connected:", surrealClient);
+  }, [surrealClient]);
+
   return (
     <div className="p-2">
-      <h3>Welcome Home!</h3>
-      <ExampleComponent />
+      <h1>Welcome to Project ZA</h1>
     </div>
   );
 }
