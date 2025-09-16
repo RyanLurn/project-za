@@ -22,5 +22,16 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src")
     }
+  },
+  optimizeDeps: {
+    exclude: ["@surrealdb/wasm"],
+    esbuildOptions: {
+      target: "esnext"
+    }
+  },
+  esbuild: {
+    supported: {
+      "top-level-await": true
+    }
   }
 });
