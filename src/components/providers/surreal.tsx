@@ -3,15 +3,12 @@ import { surrealdbWasmEngines } from "@surrealdb/wasm";
 import { useMutation } from "@tanstack/react-query";
 import Surreal from "surrealdb";
 import { SurrealContext, type SurrealProviderState } from "@/contexts/surreal";
+import { env } from "@/lib/env";
 
 interface SurrealProviderProps {
   children: React.ReactNode;
-  /** The database endpoint URL */
-  endpoint: string;
   /** Optional existing Surreal client */
   client?: Surreal;
-  /* Optional connection parameters */
-  params: Parameters<Surreal["connect"]>[1];
   /** Auto connect on component mount, defaults to true */
   autoConnect?: boolean;
 }
@@ -19,8 +16,6 @@ interface SurrealProviderProps {
 function SurrealProvider({
   children,
   client,
-  endpoint,
-  params,
   autoConnect = true
 }: SurrealProviderProps) {
   // Surreal instance remains stable across re-renders
@@ -41,7 +36,11 @@ function SurrealProvider({
     error,
     reset
   } = useMutation({
-    mutationFn: () => surrealInstance.connect(endpoint, params)
+    mutationFn: () =>
+      surrealInstance.connect(env.VITE_SURREAL_ENDPOINT, {
+        namespace: env.VITE_SURREAL_NAMESPACE,
+        database: env.VITE_SURREAL_DATABASE
+      })
   });
 
   // Wrap mutateAsync in a stable callback
