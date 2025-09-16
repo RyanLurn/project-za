@@ -1,0 +1,17 @@
+pre-commit:
+  jobs:
+    - name: format changed files
+      run: bunx --bun prettier {staged_files} --write --ignore-unknown --no-error-on-unmatched-pattern
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: check types
+      run: bun run check-types
+
+    - name: lint
+      run: bun run lint
+
+    - name: check format
+      run: bun run format:check
