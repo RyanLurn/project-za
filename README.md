@@ -35,7 +35,6 @@ This project is built with a modern, type-safe, and performant technology stack:
 Follow these steps to get a local development environment up and running.
 
 1.  **Prerequisites:**
-
     - Ensure you have [Bun](https://bun.sh/) installed on your system.
     - You will need an API key for the Google Gemini models.
 
@@ -53,7 +52,6 @@ Follow these steps to get a local development environment up and running.
     ```
 
 4.  **Set up environment variables:**
-
     - Create a new file named `.env.local` in the root of the project.
     - Copy the contents of `.env.example` into your new `.env.local` file.
     - Populate the required environment variables, such as your Gemini API key.
