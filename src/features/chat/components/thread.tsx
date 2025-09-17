@@ -1,23 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { StickToBottom } from "use-stick-to-bottom";
 import { MessageBubble } from "@/features/chat/components/message/bubble";
 import { ScrollToBottomButton } from "@/features/chat/components/utils/scroll-to-bottom-button";
-import { listMessages } from "@/features/chat/functions/list-messages";
+import { createMessagesQueryOptions } from "@/features/chat/functions/create-messages-query-options";
 import { CHAT_CONTAINER_WIDTH } from "@/features/chat/utils/constants";
 import { useSurrealClient } from "@/hooks/use-surreal";
 import { cn } from "@/lib/utils";
 
 function Thread({ className, stream }: { className?: string; stream: string }) {
   const surrealClient = useSurrealClient();
-  const { data, isPending, isError } = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ["messages"],
-    queryFn: () => listMessages({ surrealClient })
-  });
-
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
+  const { data, isError } = useSuspenseQuery(
+    createMessagesQueryOptions(surrealClient)
+  );
 
   if (isError) {
     return <div>Error</div>;

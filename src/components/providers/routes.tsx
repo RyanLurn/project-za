@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { ScreenLoader } from "@/components/utils/screen-loader";
@@ -8,7 +9,9 @@ import { routeTree } from "@/routeTree.gen";
 const router = createRouter({
   routeTree,
   context: {
-    surrealClient: undefined! // We'll set this in React-land
+    // We'll set them in React-land
+    globalQueryClient: undefined!,
+    surrealClient: undefined!
   }
 });
 
@@ -19,6 +22,7 @@ declare module "@tanstack/react-router" {
 }
 
 function RoutesProvider() {
+  const globalQueryClient = useQueryClient();
   const { client, isConnecting, isSuccess, isError, error, connect } =
     useSurrealContext();
 
@@ -38,7 +42,12 @@ function RoutesProvider() {
       </div>
     );
 
-  return <RouterProvider router={router} context={{ surrealClient: client }} />;
+  return (
+    <RouterProvider
+      router={router}
+      context={{ globalQueryClient, surrealClient: client }}
+    />
+  );
 }
 
 export { RoutesProvider };
