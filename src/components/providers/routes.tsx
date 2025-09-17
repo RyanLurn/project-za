@@ -1,38 +1,16 @@
-import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { RouterProvider } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { ScreenLoader } from "@/components/utils/screen-loader";
 import { useSurrealContext } from "@/hooks/use-surreal";
-import { routeTree } from "@/routeTree.gen";
-
-const router = createRouter({
-  routeTree,
-  context: {
-    // We'll set them in React-land
-    globalQueryClient: undefined!,
-    surrealClient: undefined!
-  }
-});
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
+import { router } from "@/lib/router";
 
 function RoutesProvider() {
   const globalQueryClient = useQueryClient();
-  const { client, isConnecting, isSuccess, isError, error, connect } =
+  const { client, isConnecting, isError, isSuccess, error, connect } =
     useSurrealContext();
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("Surreal client connected:", client);
-    }
-  }, [isSuccess, client]);
-
-  if (isConnecting) return <ScreenLoader parentName="your data" />;
+  if (isConnecting) return <ScreenLoader parentName="database connection" />;
   if (isError)
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-2">
@@ -41,6 +19,8 @@ function RoutesProvider() {
         <Button onClick={connect}>Retry</Button>
       </div>
     );
+
+  if (!isSuccess) return <ScreenLoader parentName="database client" />;
 
   return (
     <RouterProvider
