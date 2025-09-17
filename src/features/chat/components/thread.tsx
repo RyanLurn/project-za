@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { StickToBottom } from "use-stick-to-bottom";
 import { MessageBubble } from "@/features/chat/components/message/bubble";
+import { ScrollToBottomButton } from "@/features/chat/components/utils/scroll-to-bottom-button";
 import { listMessages } from "@/features/chat/functions/list-messages";
 import { CHAT_CONTAINER_WIDTH } from "@/features/chat/utils/constants";
 import { useSurrealClient } from "@/hooks/use-surreal";
@@ -53,6 +54,7 @@ function Thread({ className, stream }: { className?: string; stream: string }) {
           />
         )}
       </StickToBottom.Content>
+      <ScrollToBottomButton />
     </StickToBottom>
   );
 }
