@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { MessageBubble } from "@/features/chat/components/message/bubble";
 import { listMessages } from "@/features/chat/functions/list-messages";
 import { useSurrealClient } from "@/hooks/use-surreal";
 import { cn } from "@/lib/utils";
@@ -24,15 +25,20 @@ function Thread({ className, stream }: { className?: string; stream: string }) {
       className={cn("flex w-full flex-col gap-y-3 overflow-hidden", className)}
     >
       {data.map(message => (
-        <div key={message.id.toString()}>
-          {message.parts.map(part => {
-            if (part.type === "text") {
-              return part.text;
-            }
-          })}
-        </div>
+        <MessageBubble key={message.id.toString()} message={message} />
       ))}
-      <div>{stream}</div>
+      <MessageBubble
+        message={{
+          id: "stream",
+          role: "assistant",
+          parts: [
+            {
+              type: "text",
+              text: stream
+            }
+          ]
+        }}
+      />
     </div>
   );
 }
