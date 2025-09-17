@@ -65,7 +65,7 @@ function PlayPage() {
   }
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-2xl flex-col gap-y-3 overflow-y-auto">
+    <div className="flex size-full flex-col gap-y-3">
       <Thread className="flex-1" stream={stream} />
       <Prompt
         className="mb-3"
