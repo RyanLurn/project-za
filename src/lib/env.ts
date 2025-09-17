@@ -7,7 +7,8 @@ export const env = createEnv({
     VITE_SURREAL_ENDPOINT: z.string().min(1),
     VITE_SURREAL_NAMESPACE: z.string().min(1),
     VITE_SURREAL_DATABASE: z.string().min(1),
-    VITE_GROQ_API_KEY: z.string().min(1)
+    VITE_GROQ_API_KEY: z.string().min(1),
+    VITE_ENABLE_REACT_SCAN: z.union([z.literal("true"), z.literal("false")])
   },
   runtimeEnv: import.meta.env
 });
