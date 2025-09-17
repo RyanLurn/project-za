@@ -118,3 +118,31 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Chrome, Safari */
+::-webkit-scrollbar {
+  width: 0.5rem; /* width for vertical scrollbars */
+  height: 0.5rem; /* height for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--background); /* creates padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-foreground);
+}
+
+* {
+  /* Newly available */
+  scrollbar-width: thin;
+  /* Chrome, Firefox */
+  scrollbar-color: var(--accent) var(--background);
+}
