@@ -3,7 +3,7 @@ import { listMessages } from "@/features/chat/functions/list-messages";
 import { useSurrealClient } from "@/hooks/use-surreal";
 import { cn } from "@/lib/utils";
 
-function Thread({ className }: { className?: string }) {
+function Thread({ className, stream }: { className?: string; stream: string }) {
   const surrealClient = useSurrealClient();
   const { data, isPending, isError } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
@@ -32,6 +32,7 @@ function Thread({ className }: { className?: string }) {
           })}
         </div>
       ))}
+      <div>{stream}</div>
     </div>
   );
 }
