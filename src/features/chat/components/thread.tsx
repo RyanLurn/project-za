@@ -37,20 +37,16 @@ function Thread({ className, stream }: { className?: string; stream: string }) {
         className={cn("flex flex-col gap-4 p-4", CHAT_CONTAINER_WIDTH)}
       >
         {data.map(message => (
-          <MessageBubble key={message.id.toString()} message={message} />
+          <MessageBubble
+            key={message.id.toString()}
+            messageRole={message.role}
+            messageParts={message.parts}
+          />
         ))}
         {stream && (
           <MessageBubble
-            message={{
-              id: "stream",
-              role: "assistant",
-              parts: [
-                {
-                  type: "text",
-                  text: stream
-                }
-              ]
-            }}
+            messageRole="assistant"
+            messageParts={[{ type: "text", text: stream }]}
           />
         )}
       </StickToBottom.Content>

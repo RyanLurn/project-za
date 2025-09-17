@@ -1,28 +1,30 @@
 import { MessageAvatar } from "@/features/chat/components/message/avatar";
 import { MessageContent } from "@/features/chat/components/message/content";
-import type { Message } from "@/features/chat/types";
+import type { MessagePart, MessageRole } from "@/features/chat/types";
 import { cn } from "@/lib/utils";
 
 function MessageBubble({
   className,
-  message
+  messageRole,
+  messageParts
 }: {
   className?: string;
-  message: Message;
+  messageRole: MessageRole;
+  messageParts: Array<MessagePart>;
 }) {
   return (
     <div
       className={cn(
         "group flex w-full items-end justify-end gap-2 py-4",
-        message.role === "user"
+        messageRole === "user"
           ? "is-user"
           : "is-assistant flex-row-reverse justify-end",
         "[&>div]:max-w-[80%]",
         className
       )}
     >
-      <MessageContent messageParts={message.parts} />
-      <MessageAvatar role={message.role} />
+      <MessageContent messageParts={messageParts} />
+      <MessageAvatar role={messageRole} />
     </div>
   );
 }
